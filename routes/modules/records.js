@@ -7,22 +7,46 @@ router.get('/new', (req, res) => {
   res.render('new')
 })
 
-router.post('/', (req, res) => {
+router.post('/new', (req, res) => {
   const { name, category, date, amount } = req.body
   const userId = req.user._id
-  Category.findOne({ category })
+  Category.findOne({ name: category })
     .lean()
     .then(category => {
-      return Record.create({
+      Record.create({
         name,
         date,
         amount,
         userId,
-        categoryId: category._id
+        category: category.name,
+        categoryId: category._id,
+        icon: category.icon
       })
     })
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
+
+router.get('/:id/edit', (req, res) => {
+  const editId = req.params.id
+  Record.findById(editId)
+    .populate('categoryId')
+    .lean()
+    .then(record => {
+      const recordCategory = record.categoryId.name
+      const otherCategory = []
+      Category.find()
+        .then(categories => {
+          categories.filter(category => {
+            if (category.name !== recordCategory) {
+              return otherCategory.push(category.name)
+            }
+          })
+        })
+        .then(() => res.render('edit', { record, recordCategory, otherCategory }))
+    })
+    .catch(error => console.log(error))
+})
+
 
 module.exports = router

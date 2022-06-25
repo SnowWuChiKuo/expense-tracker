@@ -16,7 +16,7 @@
 
   <div class="container">
     <div class="row m-5">
-      <h1 class="text-center">總金額:12345</h1>
+      <h1 class="text-center">總金額:{{ totalAmount }}</h1>
     </div>
   </div>
 </div>
@@ -25,25 +25,27 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-8 col-12 m-auto">
+      {{#each records}}
       <ul class="list-group">
         <li class="list-group-item">
           <div class="d-flex justify-content-between">
             <div class="d-flex align-items-center">
-              <i class="fas fa-home fa-2x"></i>
+              <i class="{{{this.categoryId.icon}}} fa-2x"></i>
             </div>
             <div class="d-flex justify-content-evenly">
-              <h4 class="m-3">車資</h4>
-              <h4 class="m-3">12345</h4>
+              <h4 class="m-3">{{ this.name }}</h4>
+              <h4 class="m-3">{{ this.amount }}</h4>
             </div>
             <div class="d-flex align-items-center">
-              <a href="/records/:id/edit" class="btn btn-secondary m-2">修改</a>
-              <form action="/records/:id/delete?_method=DELETE" style="display: inline;" method="POST">
+              <a href="/records/{{ this._id }}/edit" class="btn btn-secondary m-2">修改</a>
+              <form action="/records/{{ this._id }}/delete?_method=DELETE" style="display: inline;" method="POST">
                 <button class="btn btn-danger m-2" type="submit">刪除</button>
               </form>
             </div>
           </div>
         </li>
       </ul>
+      {{/each}}
     </div>
   </div>
 </div>
