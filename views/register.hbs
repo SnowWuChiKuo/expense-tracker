@@ -2,6 +2,7 @@
   <div class="col-md-6 m-auto">
     <div class="card card-body">
       <h1 class="text-center mt-3">Register</h1>
+      {{>message}}
       <form action="/users/register" method="post">
         <div class="form-group m-2">
           <label for="name">Name</label>
@@ -9,15 +10,18 @@
         </div>
         <div class="form-group m-2">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" value="{{ email }}">
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+            value="{{ email }}">
         </div>
         <div class="form-group m-2">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" value="{{ password }}">
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"
+            value="{{ password }}">
         </div>
         <div class="form-group m-2">
           <label for="confirmPassword">ConfirmPassword</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Enter ConfirmPassword" value="{{ confirmPassword }}">
+          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+            placeholder="Enter ConfirmPassword" value="{{ confirmPassword }}">
         </div>
         <div class="d-grid">
           <button type="submit" class="btn btn-success m-2">Register</button>

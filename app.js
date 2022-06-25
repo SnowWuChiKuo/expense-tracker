@@ -4,6 +4,8 @@ const session = require('express-session')
 const routes = require('./routes')
 const usePassport = require('./config/passport')
 const mongoose = require('mongoose')
+const flash = require('connect-flash')
+
 const MONGODB_URI = "mongodb://localhost/expense-tracker"
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -33,10 +35,12 @@ app.use(session({
 
 app.use(express.urlencoded({ extended: true })) 
 usePassport(app)
-
+app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 
