@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <div class="container mb-5">
+    <div class="col-md-4 col-12 m-auto">
+      <form action="/category" method="post">
+        <select class="form-select" name="category" id="category" onchange="this.form.submit()">
+          <option value="類別">類別</option>
+          <option value="家居物業">家居物業</option>
+          <option value="交通出行">交通出行</option>
+          <option value="休閒娛樂">休閒娛樂</option>
+          <option value="餐飲食品">餐飲食品</option>
+          <option value="其他">其他</option>
+        </select>
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row m-5">
+      <h1 class="text-center">總金額:12345</h1>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 col-12 m-auto">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-home fa-2x"></i>
+            </div>
+            <div class="d-flex justify-content-evenly">
+              <h4 class="m-3">車資</h4>
+              <h4 class="m-3">12345</h4>
+            </div>
+            <div class="d-flex align-items-center">
+              <a href="/records/:id/edit" class="btn btn-secondary m-2">修改</a>
+              <form action="/records/:id/delete?_method=DELETE" style="display: inline;" method="POST">
+                <button class="btn btn-danger m-2" type="submit">刪除</button>
+              </form>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="d-flex justify-content-center">
+      <a href="/records/new">
+        <button class="btn btn-warning btn-lg mt-3" type="submit">新增支出</button>
+      </a>
+    </div>
+  </div>
+</div>
