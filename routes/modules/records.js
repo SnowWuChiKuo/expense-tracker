@@ -48,5 +48,28 @@ router.get('/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
+router.put('/:id/edit', (req, res) => {
+  const userId = req.user._id
+  const _id = req.params.id
+  const { name, category, date, amount } = req.body
+  Category.findOne({ name: category })
+    .lean()
+    .then(category => {
+      if (category === null) {
+        req.flash('warning_msg', '請點選類別欄位')
+        return res.redirect(`/records/${_id}/edit`)
+      }
+      Record.findOne({ userId, _id })
+        .then(record => {
+          record.name = name,
+          record.date = date,
+          record.amount = amount,
+          record.categoryId = category._id
+          return record.save()
+        })
+        .then(() => res.redirect('/'))
+        .catch(err => console.log(err))
+    })
+})
 
 module.exports = router
