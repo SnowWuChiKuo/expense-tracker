@@ -70,6 +70,15 @@ router.put('/:id/edit', (req, res) => {
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
     })
+    .catch(err => console.log(err))
+})
+
+router.delete('/:id/delete', (req, res) => {
+  const _id = req.params.id
+  const userId = req.user._id
+  Record.deleteOne({ _id, userId })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 module.exports = router
