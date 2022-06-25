@@ -2,7 +2,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const session = require('express-session')
 const routes = require('./routes')
-
+const usePassport = require('./config/passport')
 const mongoose = require('mongoose')
 const MONGODB_URI = "mongodb://localhost/expense-tracker"
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -32,7 +32,7 @@ app.use(session({
 }))
 
 app.use(express.urlencoded({ extended: true })) 
-
+usePassport(app)
 app.use(routes)
 
 app.listen(PORT, () => {
