@@ -4,6 +4,7 @@ const routes = require('./routes')
 const session = require('express-session')
 const usePassport = require('./config/passport')
 const flash = require('connect-flash')
+const methodOverride = require('method-override') 
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -24,6 +25,8 @@ app.use(session({
 }))
 
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
+
 usePassport(app)
 
 app.use(flash())
