@@ -3,12 +3,19 @@
     <div class="col-md-4 col-12 m-auto">
       <form action="/category" method="post">
         <select class="form-select" name="category" id="category" onchange="this.form.submit()">
+          {{#if recordCategory}}
+          <option value="{{ recordCategory.name }}">{{ recordCategory.name }}</option>
+          {{else}}
           <option value="類別">類別</option>
           <option value="家居物業">家居物業</option>
           <option value="交通出行">交通出行</option>
           <option value="休閒娛樂">休閒娛樂</option>
           <option value="餐飲食品">餐飲食品</option>
           <option value="其他">其他</option>
+          {{/if}}
+          {{#each otherCategory}}
+          <option value="{{this.name}}">{{this.name}}</option>
+          {{/each}}
         </select>
       </form>
     </div>
